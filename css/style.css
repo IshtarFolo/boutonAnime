@@ -1,0 +1,114 @@
+/*Remise a zero*/
+*, 
+:before, 
+:after {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(29, 180, 172);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/*Le bouton et son style*/
+header {
+    width: 100vw;
+    height: 100vh;
+}
+
+header:first-child {
+    width: 10rem;
+    height: 2rem;
+    padding-top: 0.1rem;
+    border: 5px solid rgb(0, 42, 255);
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    display: grid;
+    position: absolute;
+    overflow: hidden;
+    cursor: pointer;
+
+    transition: border 1s ;
+}
+
+/*L'interieur du bouton avec un background blanc*/
+.vide {
+    width: 10rem;
+    text-align: center;
+    pointer-events: none;
+    transform: translate(-4px, 0px);
+    user-select: none;
+
+    transition: transform 1s;
+}
+
+/*Pseudo-element entre les deux div dans le bouton*/
+.vide::after {
+    content: "";
+    width: 10rem;
+    height: 10rem;
+    top: 112%;
+    position: absolute;
+    background-color: rgb(78, 78, 191);
+    box-shadow:5px 1px;
+    z-index: 0;
+    transform: translate(-120px, 0px);
+
+    transition: transform 1s;
+}
+
+/*L'intérieur du bouton avec background bleu*/
+.remplissage {
+    width: 10rem;
+    height: 2rem;
+    transform: translate(-4px, 10px);
+    color: white;
+    background-color: rgb(137, 137, 250);
+    border-radius: 20px;
+    text-align: center;
+    user-select: none;
+    
+    transition: transform 1s;
+}
+
+/*change aspect pour faire apparaître div dessous (remplissage)*/
+header:hover .remplissage{
+    transform: translate(-4px, -20px);
+}
+
+/*La div .vide se deplace vers le haut*/
+header:hover .vide {
+    transform: translate(-4px, -20px);
+}
+
+/*Le contour du bouton change de couleur*/
+header:hover {
+    border: 5px solid rgb(255, 255, 255);
+}
+
+/*On deplace le pseudo-element entre les deux divs*/
+header:hover .vide::after {
+    transform: translate(-120px, -20px);
+}
+
+/*lorsque le bouton est clique et que la classe clique est ajoutee a la div*/
+header:not(:active) .clique {
+    animation: animEllipse 0.5s ease-out forwards;
+}
+
+/*------L'Animation-------*/
+ @keyframes animEllipse {
+        from {
+            clip-path: circle(70.7% at 50% 50%);
+        }
+
+        to {
+            clip-path: circle(0% at 50% 35%);
+        }
+} 
